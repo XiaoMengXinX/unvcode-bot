@@ -9,12 +9,25 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 type response struct {
-	Msg    string `json:"text"`
-	ChatID int64  `json:"chat_id"`
-	Method string `json:"method"`
+	QueryID string              `json:"inline_query_id"`
+	Method  string              `json:"method"`
+	Results []inlineQueryResult `json:"results"`
+}
+
+type inlineQueryResult struct {
+	Type                string              `json:"type"`
+	Id                  int64               `json:"id"`
+	Title               string              `json:"title"`
+	InputMessageContent inputMessageContent `json:"input_message_content"`
+	Description         string              `json:"description"`
+}
+
+type inputMessageContent struct {
+	MessageText string `json:"message_text"`
 }
 
 var unv *unvcode.Unv
@@ -36,13 +49,33 @@ func UnvBot(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if update.Message.Text != "" {
-		text := fmt.Sprintln(unv.Unvcode(update.Message.Text))
+	if update.InlineQuery != nil {
+		if update.InlineQuery.Query == "" {
+			return
+		}
+
+		text, mse := unv.Unvcode(update.InlineQuery.Query)
+		timeNow := time.Now().UnixNano()
 
 		data := response{
-			Msg:    text,
-			Method: "sendMessage",
-			ChatID: update.Message.Chat.ID,
+			Method:  "answerInlineQuery",
+			QueryID: update.InlineQuery.ID,
+			Results: []inlineQueryResult{
+				{
+					Type:                "article",
+					Id:                  timeNow,
+					Title:               "反和谐结果",
+					InputMessageContent: inputMessageContent{MessageText: text},
+					Description:         text,
+				},
+				{
+					Type:                "article",
+					Id:                  timeNow + 1,
+					Title:               "字符相似度",
+					InputMessageContent: inputMessageContent{MessageText: fmt.Sprintln(mse)},
+					Description:         fmt.Sprintln(mse),
+				},
+			},
 		}
 		msg, _ := json.Marshal(data)
 

@@ -13,9 +13,10 @@ import (
 )
 
 type response struct {
-	QueryID string              `json:"inline_query_id"`
-	Method  string              `json:"method"`
-	Results []inlineQueryResult `json:"results"`
+	QueryID   string              `json:"inline_query_id"`
+	Method    string              `json:"method"`
+	Results   []inlineQueryResult `json:"results"`
+	CacheTime int64               `json:"cache_time"`
 }
 
 type inlineQueryResult struct {
@@ -58,8 +59,9 @@ func UnvBot(w http.ResponseWriter, r *http.Request) {
 		timeNow := time.Now().UnixNano()
 
 		data := response{
-			Method:  "answerInlineQuery",
-			QueryID: update.InlineQuery.ID,
+			Method:    "answerInlineQuery",
+			QueryID:   update.InlineQuery.ID,
+			CacheTime: 3600,
 			Results: []inlineQueryResult{
 				{
 					Type:                "article",
@@ -78,8 +80,6 @@ func UnvBot(w http.ResponseWriter, r *http.Request) {
 			},
 		}
 		msg, _ := json.Marshal(data)
-
-		log.Printf("Response %s", string(msg))
 
 		w.Header().Add("Content-Type", "application/json")
 

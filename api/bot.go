@@ -1,9 +1,9 @@
 package api
 
 import (
+	_ "embed"
 	"encoding/json"
 	"fmt"
-	"github.com/XiaoMengXinX/go-font"
 	"github.com/XiaoMengXinX/go-unvcode"
 	"github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"io/ioutil"
@@ -17,10 +17,12 @@ type response struct {
 	Method string `json:"method"`
 }
 
+//go:embed NotoSerifSC-SemiBold.otf
+var font []byte
 var unv *unvcode.Unv
 
 func init() {
-	unv, _ = unvcode.New(font.Font)
+	unv, _ = unvcode.New(font)
 }
 
 func UnvBot(w http.ResponseWriter, r *http.Request) {

@@ -1,3 +1,5 @@
+github.com/XiaoMengXinX/go-font v0.0.0-20220207150817-b92b01cb678b h1:lcHjSbFr6UNqfm7mSpyTk58dbhgtd2+kEqv/GIlxrRQ=
+github.com/XiaoMengXinX/go-font v0.0.0-20220207150817-b92b01cb678b/go.mod h1:cAhuzFE2sm/iWBa2ik9US7ZbExeMVlyQAdjgWAVmwrk=
 github.com/XiaoMengXinX/go-unvcode v0.0.0-20220207145538-04289e7aae30 h1:83TGUkwi5y7FHKO2qklz9BgdoivH3v8OmAsGdgpnbnE=
 github.com/XiaoMengXinX/go-unvcode v0.0.0-20220207145538-04289e7aae30/go.mod h1:xhXjAJfrfY1KgbSOFMlfQG4FixteImv2Q+3NTSlaqcc=
 github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1 h1:wG8n/XJQ07TmjbITcGiUaOtXxdrINDz1b0J1w0SzqDc=

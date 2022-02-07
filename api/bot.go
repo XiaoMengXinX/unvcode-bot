@@ -3,8 +3,8 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/XiaoMengXinX/go-font"
 	"github.com/XiaoMengXinX/go-unvcode"
-	"github.com/XiaoMengXinX/unvcode-bot"
 	"github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"io/ioutil"
 	"log"
@@ -20,7 +20,7 @@ type response struct {
 var unv *unvcode.Unv
 
 func init() {
-	unv, _ = unvcode.New(bot.Font)
+	unv, _ = unvcode.New(font.Font)
 }
 
 func UnvBot(w http.ResponseWriter, r *http.Request) {

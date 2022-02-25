@@ -1,2 +1,3 @@
 # unvcode-bot
-A telegram bot of Unvcode
+
+A serverless telegram bot of Unvcode running on vercel.

@@ -1,6 +1,6 @@
 # unvcode-bot
 
-A telegram bot of Unvcode running on vercel.
+A serverless telegram bot of Unvcode running on vercel.
 
 To run this bot, you need to set the webhook to ``https://YOUR_DEPLOYMENT_URL/bot`` manually.
 

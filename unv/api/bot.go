@@ -83,6 +83,6 @@ func UnvBot(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Add("Content-Type", "application/json")
 
-		fmt.Fprintf(w, string(msg))
+		fmt.Fprint(w, string(msg))
 	}
 }
